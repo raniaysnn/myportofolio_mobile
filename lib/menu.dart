@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myportofolio_mobile/my_web.dart';
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({super.key});
@@ -8,9 +9,11 @@ class MyHomePage extends StatelessWidget {
   final String kelas = "PBP D";
 
   final List<ItemHomepage> items = [
-    ItemHomepage("Lihat Proyek", Icons.folder, Colors.pink),
-    ItemHomepage("Tambah Proyek", Icons.add_circle, Colors.blue),
-    ItemHomepage("Logout", Icons.logout, Colors.greenAccent),
+    ItemHomepage("Lihat Proyek", Icons.folder_open, MyWeb.red),
+    ItemHomepage("Lihat Experience", Icons.work_history, MyWeb.blue), //
+    ItemHomepage("Lihat Skills", Icons.bolt, MyWeb.amber), //
+    ItemHomepage("Tambah Proyek", Icons.add_circle, MyWeb.orange),
+    ItemHomepage("Logout", Icons.logout, MyWeb.raised),
   ];
 
   @override
@@ -125,11 +128,20 @@ class ItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Pilih warna teks yang kontras dengan latar: putih untuk latar gelap,
+    // gelap untuk latar terang (amber, oranye), seperti tombol di web.
+    final bool isDarkBg =
+        ThemeData.estimateBrightnessForColor(item.color) == Brightness.dark;
+    final Color foreground = isDarkBg ? Colors.white : MyWeb.bg;
     return Material(
-      // Menggunakan warna sekunder dari skema tema aplikasi.
-      // color: Theme.of(context).colorScheme.tertiary,
       color: item.color,
-      borderRadius: BorderRadius.circular(12),
+      // Sudut 24px dan garis tepi tipis, mengikuti kartu di web.
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(24),
+        side: const BorderSide(color: MyWeb.line),
+      ),
+      clipBehavior: Clip
+          .antiAlias, // efek riak InkWell ikut terpotong sesuai sudut membulat
       child: InkWell(
         // Aksi ketika kartu ditekan oleh pengguna.
         onTap: () {
@@ -148,12 +160,15 @@ class ItemCard extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(item.icon, color: Colors.white, size: 30.0),
+                Icon(item.icon, color: foreground, size: 30.0),
                 const Padding(padding: EdgeInsets.all(3)),
                 Text(
                   item.name,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(color: Colors.white),
+                  style: TextStyle(
+                    color: foreground,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ],
             ),
