@@ -34,13 +34,14 @@ class MyHomePage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // Baris horizontal untuk menampilkan 3 InfoCard secara sejajar.
+            // Tiga InfoCard berbagi lebar secara rata; jarak antarkartu 12px.
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              spacing: 12,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                InfoCard(title: 'NPM', content: npm),
-                InfoCard(title: 'Name', content: nama),
-                InfoCard(title: 'Class', content: kelas),
+                Expanded(child: InfoCard(title: 'NPM', content: npm)),
+                Expanded(child: InfoCard(title: 'Name', content: nama)),
+                Expanded(child: InfoCard(title: 'Class', content: kelas)),
               ],
             ),
 
@@ -94,18 +95,30 @@ class InfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      // Memberikan efek bayangan kartu elevasi 2 unit.
-      elevation: 2.0,
-      child: Container(
-        // Menyesuaikan lebar kartu dengan proporsi layar (dibagi 3.5).
-        width: MediaQuery.of(context).size.width / 3.5,
+      margin: EdgeInsets.zero, // jarak antarkartu diatur oleh Row, bukan oleh Card
+      child: Padding(
         padding: const EdgeInsets.all(16.0),
-        // Menyusun teks title dan content secara vertikal.
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start, // rata kiri, seperti di web
           children: [
-            Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
-            const SizedBox(height: 8.0),
-            Text(content),
+            Text(
+              title.toUpperCase(),
+              style: const TextStyle(
+                fontSize: 11,
+                letterSpacing: 1.2, // jarak antarhuruf, mirip letter-spacing di CSS
+                fontWeight: FontWeight.w500,
+                color: MyWeb.muted,
+              ),
+            ),
+            const SizedBox(height: 6.0),
+            Text(
+              content,
+              style: const TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w600,
+                color: MyWeb.text,
+              ),
+            ),
           ],
         ),
       ),
