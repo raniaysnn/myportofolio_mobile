@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class MyWeb {
   MyWeb._(); // constructor private: class ini cuma wadah konstanta, tidak perlu dibuat objeknya
