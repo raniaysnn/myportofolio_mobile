@@ -11,7 +11,7 @@ Aplikasi mobile Flutter untuk portofolio pribadi Rania Yasin (PBP D), versi mobi
 
 ## Progres mingguan
 - **Tugas 7: Minggu ini aku hanya memodifikasi dan menambahkan tombol menu sesuai yang ada di Website portofolioku karena kurang lebih sisanya sudah dikerjakan di Tutorial 8, then aku lebih memperdalam ulang Tutorial 8 dulu sebelum lanjut mengerjakan Tugas 7 ini, tetapi masih kagok saat memahaminya but well im still doin it.**
-- **Tugas 8: Minggu ini aku menambahkan form Add Experience yang fieldnya ngikutin model Experience di web portofolioku, terus bisa dibuka dari kartu Tambah Experience dan dari drawer. Sisanya pakai pola yang sama kayak form Add Project di Tutorial 9.**
+- **Tugas 8: Minggu ini aku menambahkan form Add Experience yang fieldnya ngikutin model Experience di web portofolioku, yang bisa dibuka dari kartu Tambah Experience dan dari drawer. Sisanya pakai pola yang sama seperti form Add Project di Tutorial 9.**
 
 
 ### Tugas 7
