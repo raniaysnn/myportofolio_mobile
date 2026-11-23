@@ -11,6 +11,7 @@ Aplikasi mobile Flutter untuk portofolio pribadi Rania Yasin (PBP D), versi mobi
 
 ## Progres mingguan
 - **Tugas 7: Minggu ini aku hanya memodifikasi dan menambahkan tombol menu sesuai yang ada di Website portofolioku karena kurang lebih sisanya sudah dikerjakan di Tutorial 8, then aku lebih memperdalam ulang Tutorial 8 dulu sebelum lanjut mengerjakan Tugas 7 ini, tetapi masih kagok saat memahaminya but well im still doin it.**
+- **Tugas 8: Minggu ini aku menambahkan form Add Experience yang fieldnya ngikutin model Experience di web portofolioku, terus bisa dibuka dari kartu Tambah Experience dan dari drawer. Sisanya pakai pola yang sama kayak form Add Project di Tutorial 9.**
 
 
 ### Tugas 7
@@ -69,6 +70,33 @@ Aplikasi mobile Flutter untuk portofolio pribadi Rania Yasin (PBP D), versi mobi
   - Mengubah main() atau nilai awal field/state butuh hot restart.
   - Mengubah pubspec.yaml (menambah package atau asset) butuh full restart: tekan q, lalu flutter run lagi.
 
+### Tugas 8
+
+1. Jelaskan perbedaan antara Navigator.push(), Navigator.pushReplacement(), dan Navigator.pop(). Metode apa yang digunakan untuk membuka formulir dari kartu aksi? Jelaskan juga bagaimana opsi Home di drawer membawa pengguna kembali ke halaman utama.
+- Navigator.push(): numpuk halaman baru di atas halaman sekarang -> halaman lama masih ada, jadi bisa back.
+- Navigator.pushReplacement(): ganti halaman sekarang dengan halaman baru -> halaman lama dibuang, jadi tidak bisa back ke situ.
+- Navigator.pop(): buang halaman paling atas -> balik ke halaman sebelumnya. Dipakai juga buat nutup AlertDialog.
+- Kartu Tambah Experience pakai Navigator.push(), jadi dari form bisa balik ke halaman utama pakai tombol back.
+- Opsi Home di drawer pakai Navigator.pushReplacement() ke MyHomePage, jadi halaman form diganti dengan halaman utama, bukan ditumpuk.
+
+2. Bagaimana susunan Scaffold, AppBar, dan Drawer membantu menjaga struktur halaman tetap konsisten? Berikan satu contoh penggunaan warna tema portofolio di lebih dari satu halaman.
+- Scaffold jadi kerangka yang sama di tiap halaman (appBar, drawer, body), jadi tiap halaman tinggal ngisi body-nya.
+- AppBar di semua halaman gayanya sama, jadi tetap kerasa satu aplikasi.
+- Drawer dibuat sekali (LeftDrawer) terus dipakai di halaman utama, Add Project, dan Add Experience. Kalau mau menambahkan menu cukup ubah satu file.
+- Contoh warna: merah MyWeb.red diatur jadi primary di ThemeData, terus dipakai lewat Theme.of(context).colorScheme.primary buat AppBar di halaman utama, Add Project, Add Experience, dan tombol Save.
+
+3. Mengapa tata letak tersebut dipilih untuk formulir? Jelaskan peran widget pengatur jarak dan widget penggulir ketika ruang layar terbatas.
+- Formnya disusun satu kolom (Column) dari atas ke bawah, sama kayak form Add Project, biar urutannya jelas dan gampang diisi di HP.
+- Padding: ngasih jarak antar-input dan dari pinggir layar biar tidak dempet.
+- SingleChildScrollView: bikin form bisa di-scroll, jadi kalau layarnya kecil atau keyboard muncul, semua input dan tombol Save tetap bisa dijangkau dan tidak overflow.
+
+4. Apa peran GlobalKey<FormState>, validator, dan validate() saat tombol Simpan ditekan? Berikan satu contoh nilai yang ditolak oleh validasi dan jelaskan mengapa memilih jenis input atau papan ketik saja belum cukup.
+- GlobalKey<FormState>: kunci buat ngakses state form dari luar, misalnya dari tombol Save.
+- validator: fungsi di tiap field -> return null kalau valid, return pesan error kalau tidak valid.
+- validate(): ngejalanin semua validator sekaligus pas Save ditekan. Kalau ada yang salah, error muncul di kolomnya dan dialog tidak muncul.
+- Contoh yang ditolak: URL thumbnail "bukan-url". Walaupun keyboardnya sudah keyboard URL, user tetap bisa ngetik apa aja, jadi tetap harus dicek pakai validator. Judul yang isinya spasi doang juga ditolak.
+
 ## AI Disclosure: 
 - Tools: Claude
 - Saya gunakan memperbaiki error flutter run dan folder build yang terkunci, belajar Git dan branch, mencoba mengerjakan ulang Tutorial 8 dan memahami lebih dalam baru mencoba mengerjakan Tugas 7 sendiri lalu meminta saran dan panduan lebih lanjut untuk menerapkan desain web (token warna, tema gelap, warna teks otomatis, InfoCard) secara step-by-step. Lalu membantu mengecek error saat flutter analyze karena penamaan class yang seharusnya UpperCamelCase. Saya juga meminta penjelasan per line kenapa syntaxnya seperti ini dan fungsinya untuk apa.
+- Tugas 8: Saya gunakan untuk mengecek apa yang belum dikerjakan dari soal Tugas 8, membuat draf form Add Experience yang fieldnya disesuaikan dengan model Experience di web, menambahkan kartu dan opsi drawer, dan membuat draf jawaban reflektif. Versi pertama dari AI terlalu banyak mengubah kode Tugas 7 dan Tutorial 9, jadi aku minta diulang supaya kode sebelumnya tidak diubah dan formnya mengikuti pola form Add Project.
