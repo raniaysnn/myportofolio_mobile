@@ -3,6 +3,10 @@ import 'package:myportofolio_mobile/screens/menu.dart';
 import 'package:myportofolio_mobile/my_web.dart';
 import 'package:myportofolio_mobile/screens/project_form.dart';
 import 'package:myportofolio_mobile/screens/experience_form.dart';
+import 'package:myportofolio_mobile/screens/project_list_screen.dart';
+import 'package:myportofolio_mobile/services/auth_state.dart';
+import 'package:myportofolio_mobile/widgets/auth_guard.dart';
+import 'package:provider/provider.dart';
 
 class ItemCard extends StatelessWidget {
   final ItemHomepage item;
@@ -27,9 +31,31 @@ class ItemCard extends StatelessWidget {
           .antiAlias, // efek riak InkWell ikut terpotong sesuai sudut membulat
       child: InkWell(
         // Aksi ketika kartu ditekan oleh pengguna.
-        onTap: () {
+        onTap: () async {
+          final messenger = ScaffoldMessenger.of(context);
+
+          // Logout: cabut token di server lalu beri tahu pengguna.
+          if (item.name == "Logout") {
+            final auth = context.read<AuthState>();
+            if (!auth.isLoggedIn) {
+              messenger
+                ..hideCurrentSnackBar()
+                ..showSnackBar(
+                  const SnackBar(content: Text("Kamu belum login.")),
+                );
+              return;
+            }
+            await auth.logout();
+            messenger
+              ..hideCurrentSnackBar()
+              ..showSnackBar(
+                const SnackBar(content: Text("Kamu berhasil logout.")),
+              );
+            return;
+          }
+
           // Menampilkan SnackBar dengan pesan interaktif.
-          ScaffoldMessenger.of(context)
+          messenger
             ..hideCurrentSnackBar()
             ..showSnackBar(
               SnackBar(
@@ -38,7 +64,17 @@ class ItemCard extends StatelessWidget {
             );
 
           // Navigate ke halaman yang sesuai
-          if (item.name == "Tambah Proyek") {
+          if (item.name == "Lihat Proyek") {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ProjectListScreen(),
+              ),
+            );
+          } else if (item.name == "Tambah Proyek") {
+            // Halaman tambah proyek hanya bisa dibuka setelah login.
+            if (!await ensureLoggedIn(context)) return;
+            if (!context.mounted) return;
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => const ProjectFormPage()),
