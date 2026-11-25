@@ -7,7 +7,11 @@ Aplikasi mobile Flutter untuk portofolio pribadi Rania Yasin (PBP D), versi mobi
 2. `git clone https://github.com/raniaysnn/myportofolio_mobile.git`
 3. `cd myportofolio_mobile`
 4. `flutter pub get`
-5. `flutter run -d chrome`
+5. `dart run build_runner build --delete-conflicting-outputs` (membuat berkas `*.g.dart` model JSON)
+6. Jalankan backend Django (`python manage.py runserver`), lalu jalankan aplikasi:
+   - Emulator Android: `flutter run` (default `http://10.0.2.2:8000`)
+   - Chrome: `flutter run -d chrome --dart-define=API_BASE_URL=http://localhost:8000`
+   - Backend yang sudah di-deploy: `flutter run --dart-define=API_BASE_URL=https://<domain-django>`
 
 ## Progres mingguan
 - **Tugas 7: Minggu ini aku hanya memodifikasi dan menambahkan tombol menu sesuai yang ada di Website portofolioku karena kurang lebih sisanya sudah dikerjakan di Tutorial 8, then aku lebih memperdalam ulang Tutorial 8 dulu sebelum lanjut mengerjakan Tugas 7 ini, tetapi masih kagok saat memahaminya but well im still doin it.**
