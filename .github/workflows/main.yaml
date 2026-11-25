@@ -26,6 +26,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # AGP 9 / Gradle 9 butuh JDK yang lebih baru dari default runner (17);
+      # disamakan dengan JDK bawaan Android Studio yang dipakai saat build lokal.
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "25"
+
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
