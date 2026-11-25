@@ -45,9 +45,15 @@ class MyHomePage extends StatelessWidget {
               spacing: 12,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(child: InfoCard(title: 'NPM', content: npm)),
-                Expanded(child: InfoCard(title: 'Name', content: nama)),
-                Expanded(child: InfoCard(title: 'Class', content: kelas)),
+                Expanded(
+                  child: InfoCard(title: 'NPM', content: npm),
+                ),
+                Expanded(
+                  child: InfoCard(title: 'Name', content: nama),
+                ),
+                Expanded(
+                  child: InfoCard(title: 'Class', content: kelas),
+                ),
               ],
             ),
 
@@ -101,17 +107,20 @@ class InfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.zero, // jarak antarkartu diatur oleh Row, bukan oleh Card
+      margin:
+          EdgeInsets.zero, // jarak antarkartu diatur oleh Row, bukan oleh Card
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start, // rata kiri, seperti di web
+          crossAxisAlignment:
+              CrossAxisAlignment.start, // rata kiri, seperti di web
           children: [
             Text(
               title.toUpperCase(),
               style: const TextStyle(
                 fontSize: 11,
-                letterSpacing: 1.2, // jarak antarhuruf, mirip letter-spacing di CSS
+                letterSpacing:
+                    1.2, // jarak antarhuruf, mirip letter-spacing di CSS
                 fontWeight: FontWeight.w500,
                 color: MyWeb.muted,
               ),
